@@ -20,20 +20,30 @@ class _PerguntasAppState extends State<_PerguntasApp> {
     });
   }
 
-  void _diminuiUm() {
-    setState(() {
-      _perguntaSelecionada--;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
-    final perguntas = [
-      "Qual é a sua cor favorita?",
-      "Qual é o seu animal favorito?"
+    final List<Map<String, Object>> perguntas = [
+      {
+        "texto": "Qual é a sua cor favorita?",
+        "respostas": ["Preto", "Vermelho", "Verde", "Branco"]
+      },
+      {
+        "texto": "Qual é o seu animal favorito?",
+        "respostas": ["Coelho", "Cobra", "Elefante", "Leão"]
+      },
+      {
+        "texto": "Qual é o seu instrutor favorito?",
+        "respostas": ["Maria", "João", "Leo", "Pedro"]
+      }
     ];
 
-    String question = perguntas[_perguntaSelecionada];
+    String question =
+        perguntas.elementAt(_perguntaSelecionada)["texto"].toString();
+
+    List<String> respostas =
+        perguntas.elementAt(_perguntaSelecionada).cast()["respostas"];
+    List<Widget> widgets =
+        respostas.map((e) => Resposta(e, _adicionaMaisUm)).toList();
 
     return MaterialApp(
       home: Scaffold(
@@ -44,18 +54,7 @@ class _PerguntasAppState extends State<_PerguntasApp> {
           foregroundColor: Colors.black,
         ),
         body: Column(
-          children: [
-            Questao(question),
-            const SizedBox(height: 10),
-            Resposta("Resposta1", _adicionaMaisUm),
-            //adiciona espaço entre um botão e outro
-            const SizedBox(height: 10),
-            //adiciona espaço entre um botão e outro
-            Resposta("Resposta2", _diminuiUm),
-            const SizedBox(height: 10),
-            //adiciona espaço entre um botão e outro
-            Resposta("Resposta3", _adicionaMaisUm),
-          ],
+          children: [Questao(question), ...widgets],
         ),
       ),
     );
