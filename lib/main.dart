@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:projeto_perguntas/questao.dart';
+import 'package:projeto_perguntas/resposta.dart';
 
 main() {
   runApp(_PerguntasApp());
@@ -45,45 +46,15 @@ class _PerguntasAppState extends State<_PerguntasApp> {
         body: Column(
           children: [
             Questao(question),
-            const SizedBox(height: 10), //adiciona espaço entre um botão e outro
-            ElevatedButton(
-              child: const Text("Resposta1"),
-              onPressed: _adicionaMaisUm,
-              style: ButtonStyle(
-                elevation: MaterialStateProperty.all(10),
-                shape: MaterialStateProperty.all(
-                  RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30.0),
-                  ),
-                ),
-              ),
-            ),
-            const SizedBox(height: 10), //adiciona espaço entre um botão e outro
-            ElevatedButton(
-              child: const Text("Resposta2"),
-              onPressed: _diminuiUm,
-              style: ButtonStyle(
-                elevation: MaterialStateProperty.all(10),
-                shape: MaterialStateProperty.all(
-                  RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30.0),
-                  ),
-                ),
-              ),
-            ),
-            const SizedBox(height: 10), //adiciona espaço entre um botão e outro
-            ElevatedButton(
-              child: const Text("Resposta3"),
-              onPressed: () {},
-              style: ButtonStyle(
-                elevation: MaterialStateProperty.all(10),
-                shape: MaterialStateProperty.all(
-                  RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30.0),
-                  ),
-                ),
-              ),
-            ),
+            const SizedBox(height: 10),
+            Resposta("Resposta1", _adicionaMaisUm),
+            //adiciona espaço entre um botão e outro
+            const SizedBox(height: 10),
+            //adiciona espaço entre um botão e outro
+            Resposta("Resposta2", _diminuiUm),
+            const SizedBox(height: 10),
+            //adiciona espaço entre um botão e outro
+            Resposta("Resposta3", _adicionaMaisUm),
           ],
         ),
       ),
