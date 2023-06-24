@@ -14,10 +14,12 @@ class _PerguntasApp extends StatefulWidget {
 
 class _PerguntasAppState extends State<_PerguntasApp> {
   var _perguntaSelecionada = 0;
+  var _pontuacaoTotal = 0;
 
-  void _adicionaMaisUm() {
+  void _adicionaMaisUm(int pontuacao) {
     setState(() {
       _perguntaSelecionada++;
+      _pontuacaoTotal += pontuacao;
     });
   }
 
@@ -29,19 +31,20 @@ class _PerguntasAppState extends State<_PerguntasApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-          appBar: AppBar(
-            title: const Text("Perguntas e Respostas"),
-            backgroundColor: Colors.amber,
-            centerTitle: true,
-            foregroundColor: Colors.black,
-          ),
-          body: aindaTemPerguntaParaResponder
-              ? Questionario(
-                  perguntas: Constants.PERGUNTAS,
-                  funcao: _adicionaMaisUm,
-                  perguntaSelecionada: _perguntaSelecionada,
-                )
-              : Resultado("Parabéns")),
+        appBar: AppBar(
+          title: const Text("Perguntas e Respostas"),
+          backgroundColor: Colors.amber,
+          centerTitle: true,
+          foregroundColor: Colors.black,
+        ),
+        body: aindaTemPerguntaParaResponder
+            ? Questionario(
+                perguntas: Constants.PERGUNTAS,
+                funcao: _adicionaMaisUm,
+                perguntaSelecionada: _perguntaSelecionada,
+              )
+            : Resultado(pontuacao: _pontuacaoTotal),
+      ),
     );
   }
 }
